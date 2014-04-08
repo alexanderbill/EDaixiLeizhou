@@ -1,0 +1,25 @@
+{
+    "ret":true,
+    "error":"错误",
+    "error_code":"0000",
+    "version":"1.0.0",
+    "ts":"2014-03-10 11:11:00"
+    "data":""
+    "banners":[
+                   {"banner_id":"1",
+                   "url_type": 1,
+                   "url":"http://www.rongchain.com",
+                   "banner_text":"专业干洗服务，您身边的洗衣专家",
+                   "banner_pic":"banner_demo_1.png"},
+                   {"banner_id":"2",
+                   "url_type": 0,
+                   "url":"1",
+                   "banner_text":"一站式保洁，让您放心的家政公司",
+                   "banner_pic":"banner_demo_2.png"},
+                   {"banner_id":"1",
+                   "url_type": 0,
+                   "url":"1",
+                   "banner_text":"专业干洗服务",
+                   "banner_pic":"banner_demo_3.png"}
+                    ]
+}

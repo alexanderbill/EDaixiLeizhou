@@ -1,0 +1,12 @@
+{
+    "ret":true,
+    "error":"错误",
+    "error_code":"0000",
+    "version":"1.0.0",
+    "ts":"2014-03-10 11:11:00"
+    "data":""
+    "user":
+          {"user_id":"123",
+           "user_token": "1231231231",
+           "user_name":"18600547490"}
+}
