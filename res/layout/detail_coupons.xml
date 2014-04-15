@@ -3,25 +3,24 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_horizontal"
-    android:padding="20dp"
     android:orientation="vertical" >
 
-    <Button
+    <ImageView
         android:id="@+id/coupons1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:background="@drawable/coupons1" />
+        android:src="@drawable/coupons1" />
     
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="@dimen/seperator_height" />
 
-    <Button
+    <ImageView
         android:id="@+id/coupons2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:background="@drawable/coupons2" />
+        android:src="@drawable/coupons2" />
 
 </LinearLayout>

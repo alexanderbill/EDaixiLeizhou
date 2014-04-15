@@ -7,50 +7,43 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class FourthFragment extends Fragment {
+public class FourthFragment extends BaseFragment {
+    public FourthFragment() {
+        super(R.string.fourth);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        LinearLayout v = (LinearLayout) inflater.inflate(
-                R.layout.linearlayout4, container, false);
-        ViewStub vs = (ViewStub) v
-                .findViewById(R.id.bottom_navigation_bar_stub);
-        vs.inflate();
-
-        LinearLayout scrollview = (LinearLayout) v
-                .findViewById(R.id.scrollview);
-        scrollview.addView(getView(inflater, R.string.welcome,
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        mContainer.addView(getView(inflater, R.string.welcome,
                 R.drawable.welcome, AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.grade, R.drawable.grade,
+        mContainer.addView(getView(inflater, R.string.grade, R.drawable.grade,
                 AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.F_Q, R.drawable.fandq,
+        mContainer.addView(getView(inflater, R.string.F_Q, R.drawable.fandq,
                 AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.protocal,
+        mContainer.addView(getView(inflater, R.string.protocal,
                 R.drawable.protocal, AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.feedback,
+        mContainer.addView(getView(inflater, R.string.feedback,
                 R.drawable.feedback, AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.upgrade,
+        mContainer.addView(getView(inflater, R.string.upgrade,
                 R.drawable.upgrade, AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.about, R.drawable.about,
+        mContainer.addView(getView(inflater, R.string.about, R.drawable.about,
                 AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.blog, 0,
+        mContainer.addView(getView(inflater, R.string.blog, 0,
                 AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.wechat, 0,
+        mContainer.addView(getView(inflater, R.string.wechat, 0,
                 AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.website,
+        mContainer.addView(getView(inflater, R.string.website,
                 0, AddressCenter.class));
-        scrollview.addView(getView(inflater, R.string.phone, 0,
+        mContainer.addView(getView(inflater, R.string.phone, 0,
                 AddressCenter.class));
-
-        TextView tv = (TextView) v.findViewById(R.id.title);
-        tv.setText(getResources().getText(R.string.fourth));
         return v;
     }
 
@@ -85,5 +78,11 @@ public class FourthFragment extends Fragment {
         go.setOnClickListener(onclick);
         linearLayout.findViewById(R.id.total).setOnClickListener(onclick);
         return linearLayout;
+    }
+
+    @Override
+    protected View getUpperView() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

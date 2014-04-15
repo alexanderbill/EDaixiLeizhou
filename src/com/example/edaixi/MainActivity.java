@@ -2,20 +2,16 @@ package com.example.edaixi;
 
 import de.greenrobot.event.Subscribe;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class MainActivity extends FragmentActivity {
     public static final String TAG = "MainActivity";
-    private String mId;
-    private String mToken;
     private FragmentTabHost mTabHost;
     private EventHandler mEventHandler = new EventHandler();
     private final int[] mIndicatorTitle = { R.string.first, R.string.second,
@@ -36,7 +32,7 @@ public class MainActivity extends FragmentActivity {
         @Subscribe
         public void onExit(AppExit exit) {
             if (exit.mClear) {
-                saveLogin(null, null);
+                SystemUtils.saveLogin(null, null);
             }
             finish();
         }
@@ -68,12 +64,6 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         SystemUtils.setActivity(this);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        mId = (String) bundle.get(LoginActivity.ID);
-        mToken = (String) bundle.get(LoginActivity.TOKEN);
-        saveLogin(mId, mToken);
-        Log.d(TAG, "Login:" + mId + " " + mToken);
         EventDispatcher.register(mEventHandler, EventDispatcher.Group.Main);
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -87,14 +77,27 @@ public class MainActivity extends FragmentActivity {
                             (String) getResources().getText(mIndicatorTitle[i]))
                             .setIndicator(indicator), mIndicatorClass[i], null);
         }
-    }
 
-    private void saveLogin(String id, String token) {
-        SharedPreferences pref = getSharedPreferences(LoginActivity.TAG, MODE_PRIVATE);
-        Editor editor = pref.edit();
-        editor.putString(LoginActivity.ID, id);
-        editor.putString(LoginActivity.TOKEN, token);
-        EditorUtils.fastCommit(editor);
+        mTabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (!SystemUtils.checkLogin(1)) {
+                    mTabHost.setCurrentTab(1);
+                }
+            }
+        });
+        mTabHost.getTabWidget().getChildAt(2).setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (!SystemUtils.checkLogin(2)) {
+                    mTabHost.setCurrentTab(2);
+                }
+            }
+        });
     }
 
     private View getIndicatorView(int txtId, int imageId, int layoutId) {
@@ -110,5 +113,14 @@ public class MainActivity extends FragmentActivity {
         super.onDestroy();
         EventDispatcher.unregister(mEventHandler);
         mTabHost = null;
+    }
+
+    @Override
+    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+        super.onActivityResult(arg0, arg1, arg2);
+        if (arg2 != null) {
+            int pos = arg2.getExtras().getInt("pos");
+            mTabHost.setCurrentTab(pos);
+        }
     }
 }

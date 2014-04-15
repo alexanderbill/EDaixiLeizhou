@@ -3,8 +3,8 @@
     "error":"错误",
     "error_code":"0000",
     "version":"1.0.0",
-    "ts":"2014-03-10 11:11:00"
-    "data":""
+    "ts":"2014-03-10 11:11:00",
+    "data":"",
     "products":[{
                     "product_id":"1",
                     "product_name":"洗衣",

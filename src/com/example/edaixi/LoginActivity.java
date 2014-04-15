@@ -2,37 +2,33 @@ package com.example.edaixi;
 
 import com.example.edaixi.R;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class LoginActivity extends FragmentActivity implements OnClickListener {
 
-    public static final String TAG = "LoginActivity";
-    public static final String ID = "LoginID";
-    public static final String TOKEN = "TOKEN";
     private EditText mPhoneText;
     private EditText mPassText;
-
+    private int mPos;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_container);
+        setContentView(R.layout.linearlayout);
 
-        if (checkLogin()) {
-            return;
-        }
+        Intent intent = getIntent();
+        mPos = intent.getExtras().getInt("pos");
         ViewStub vs = (ViewStub) findViewById(R.id.bottom_navigation_bar_stub);
         vs.inflate();
         findViewById(R.id.back).setOnClickListener(this);
@@ -40,7 +36,10 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
         TextView tv = (TextView) findViewById(R.id.title);
         tv.setText(R.string.app_name);
 
-        ViewGroup contentContainer = (ViewGroup) findViewById(R.id.container);
+        LinearLayout contentContainer = (LinearLayout) findViewById(R.id.total);
+        contentContainer.setPadding(0, 0, 0, 0);
+        ScrollView scrollview = (ScrollView) contentContainer.getParent();
+        scrollview.setBackgroundResource(R.color.main_bg);
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         LinearLayout loginView = (LinearLayout) inflater.inflate(R.layout.login, null, false);
 
@@ -52,26 +51,6 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
         mPhoneText = (EditText) loginView.findViewById(R.id.inputnumber);
         mPassText = (EditText) loginView.findViewById(R.id.inputpass);
         contentContainer.addView(loginView);
-    }
-
-    private boolean checkLogin() {
-        SharedPreferences pref = getSharedPreferences(TAG, MODE_PRIVATE);
-        String id = pref.getString(ID, null);
-        String token = pref.getString(TOKEN, null);
-        if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(token)) {
-            startMainActivity(id, token);
-            return true;
-        }
-        return false;
-    }
-
-    private void startMainActivity(String id, String token) {
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.putExtra(ID, id);
-        intent.putExtra(TOKEN, token);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.animator.non_fade, R.animator.non_fade);
     }
 
     @Override
@@ -96,7 +75,14 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 
     private void checkLogin(String id, String token) {
         if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(token)) {
-            startMainActivity(id, token);
+            Intent intent = new Intent();
+            intent.putExtra("pos", mPos);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+            SystemUtils.saveLogin(id, token);
+        } else {
+            setResult(Activity.RESULT_OK, null);
         }
+        finish();
     }
 }

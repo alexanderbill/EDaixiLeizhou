@@ -1,42 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/total"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+    android:orientation="vertical"
+    android:background="@drawable/address_background"
+    android:padding="2dp" >
 
     <LinearLayout
-        android:id="@+id/total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/main_bg" >
+        android:background="@color/main_bg"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/city"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:src="@drawable/edit"
+            android:layout_gravity="right|center_vertical"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
 </LinearLayout>

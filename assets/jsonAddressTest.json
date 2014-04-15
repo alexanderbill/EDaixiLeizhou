@@ -1,15 +1,15 @@
 {
-    "ret":true,
-    "error":"错误",
-    "error_code":"0000",
-    "version":"1.0.0",
-    "ts":"2014-03-10 11:11:00",
-    "data":"",
-    "addresses":[
-               {"address_id":"1",
-               "province":"",
-               "city":"北京",
-               "area":"朝阳区",
-               "address":"呼家楼光明小区1号楼3单元302号"
-               }]
+"ret":true,
+"error":"错误",
+"error_code":"0000",
+"version":"1.0.0",
+"ts":"2014-03-10 11:11:00",
+"data":"",
+"addresses":[
+{"address_id":"1",
+"province":"",
+"city":"北京",
+"area":"朝阳区",
+"address":"呼家楼光明小区1号楼3单元302号"
+}]
 }
